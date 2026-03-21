@@ -4,3 +4,41 @@
   --font-sans: InterVariable, sans-serif;
   --font-sans--font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
 }
+
+:root {
+  --color-theme: #001B66;
+  --color-background: #FFFFFF;
+  --color-surface: #F4F4F4;
+}
+
+.theme-bg {
+  background-color: var(--color-background);
+}
+
+.theme-nav {
+  background-color: var(--color-theme);
+}
+
+.theme-surface {
+  background-color: var(--color-surface);
+}
+
+.theme-text {
+  color: var(--color-theme);
+}
+
+.theme-border {
+  border-color: var(--color-theme);
+}
+
+.theme-soft-border {
+  border-color: rgba(0, 27, 102, 0.22);
+}
+
+.theme-soft-text {
+  color: rgba(0, 27, 102, 0.72);
+}
+
+.theme-overlay {
+  background-color: var(--color-surface);
+}
