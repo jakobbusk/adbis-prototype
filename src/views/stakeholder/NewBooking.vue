@@ -1,12 +1,12 @@
 <script setup>
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 
 
 const steps = ref([
-  { id: 'Step 1', name: 'General information', href: '#', status: 'complete' },
-  { id: 'Step 2', name: 'pas', href: '#', status: 'current' },
-  { id: 'Step 3', name: 'Shipping consignee/consignor', href: '#', status: 'upcoming' },
+  { id: 'Step 1', name: 'General information', status: 'current' },
+  { id: 'Step 2', name: 'Cargo Details', status: 'upcoming' },
+  { id: 'Step 3', name: 'Shipping consignee/consignor',  status: 'upcoming' },
 ])
 // function to change steps
 function changeStep(step) {
@@ -32,6 +32,30 @@ function changeStep(step) {
      }
    });
 }
+
+
+// Logic for forward/backward buttons
+function nextStep() {
+    const currentIndex = steps.value.findIndex(s => s.status === 'current');
+    if (currentIndex < steps.value.length - 1) {
+    changeStep(steps.value[currentIndex + 1]);
+    }
+}
+function previousStep() {
+  const currentIndex = steps.value.findIndex(s => s.status === 'current');
+  if (currentIndex > 0) {
+    changeStep(steps.value[currentIndex - 1]);
+  }
+}
+
+const currentStepIndex = computed(() => {
+  const index = steps.value.findIndex(s => s.status === 'current')
+  return index === -1 ? 0 : index
+})
+
+const firstStep = computed(() => currentStepIndex.value === 0)
+const lastStep = computed(() => currentStepIndex.value === steps.value.length - 1)
+
 </script>
 
 <template>
@@ -39,8 +63,8 @@ function changeStep(step) {
         <div class="pb-5 sm:flex sm:items-center sm:justify-between">
         <h3 class="theme-text text-base font-semibold">Creating a shipment booking</h3>
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
-            <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold theme-text shadow-xs inset-ring theme-soft-border hover:opacity-90">Share</button>
-        <button type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</button>
+
+            <button type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</button>
             </div>
         </div>
         <nav aria-label="Progress">
@@ -61,5 +85,17 @@ function changeStep(step) {
             </li>
             </ol>
         </nav>
+
+        <!-- Content for each step would go here -->
+
+        <!-- Backward/Forward button  -->
+        <div class="mt-5 flex justify-between">
+          <button type="button" @click="previousStep" :disabled="firstStep" :class="firstStep ? 'opacity-50 cursor-not-allowed hover:opacity-50' : 'hover:opacity-90'" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold theme-text shadow-xs inset-ring theme-soft-border">
+                Previous
+            </button>
+          <button type="button" @click="nextStep" :disabled="lastStep" :class="lastStep ? 'opacity-50 cursor-not-allowed hover:opacity-50' : 'hover:opacity-90'" class="theme-nav inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs  focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">
+                Next
+            </button>
+        </div>
     </StakeholderLayout>
 </template>
