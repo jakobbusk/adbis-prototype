@@ -87,6 +87,17 @@ const lastStep = computed(() => currentStepIndex.value === steps.value.length - 
         </nav>
 
         <!-- Content for each step would go here -->
+         <div class="mt-5">
+            <div v-if="steps[0].status === 'current'">
+
+            </div>
+            <div v-else-if="steps[1].status === 'current'">
+
+            </div>
+            <div v-else-if="steps[2].status === 'current'">
+
+            </div>
+        </div>
 
         <!-- Backward/Forward button  -->
         <div class="mt-5 flex justify-between">
