@@ -7,6 +7,7 @@ const steps = ref([
   { id: 'Step 1', name: 'General information', status: 'current' },
   { id: 'Step 2', name: 'Cargo Details', status: 'upcoming' },
   { id: 'Step 3', name: 'Shipping consignee/consignor',  status: 'upcoming' },
+  { id: 'Step 4', name: 'Review and Confirm',  status: 'upcoming' },
 ])
 // function to change steps
 function changeStep(step) {
