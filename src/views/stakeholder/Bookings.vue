@@ -18,41 +18,71 @@
   <table class="w-full text-left">
     <thead class="border-b theme-soft-border bg-gray-50 ">
       <tr>
-        <th class="py-3.5">Amount</th>
-        <th>Client</th>
+        <th class="py-3.5">
+          <div class="mt-2">
+            Booking ID
+            <input type="text" name="booking" id="booking" class="block w-3/4 rounded-md theme-surface px-2 py-0.5 text-base theme-text outline outline-1 -outline-offset-1 theme-soft-border placeholder:theme-soft-text focus:outline-2 focus:-outline-offset-2 focus:theme-border sm:text-sm/6" placeholder="Search bookings" />
+          </div>
+
+        </th>
+        <th>
+          <div class="mt-2">
+            Booking/Shipping Responsible
+            <input type="text" name="shipping_responsible" id="shipping_responsible" class="block w-3/4 rounded-md theme-surface px-2 py-0.5 text-base theme-text outline outline-1 -outline-offset-1 theme-soft-border placeholder:theme-soft-text focus:outline-2 focus:-outline-offset-2 focus:theme-border sm:text-sm/6" placeholder="Search bookings" />
+          </div>
+        </th>
+        <th>
+          <div class="mt-2">
+            Shipment details
+            <input type="text" name="shipment_details" id="shipment_details" class="block w-3/4 rounded-md theme-surface px-2 py-0.5 text-base theme-text outline outline-1 -outline-offset-1 theme-soft-border placeholder:theme-soft-text focus:outline-2 focus:-outline-offset-2 focus:theme-border sm:text-sm/6" placeholder="Search bookings" />
+          </div>
+        </th>
+        <th>
+          <div class="mt-2">
+            Pickup
+            <input type="text" name="pickup" id="pickup" class="block w-3/4 rounded-md theme-surface px-2 py-0.5 text-base theme-text outline outline-1 -outline-offset-1 theme-soft-border placeholder:theme-soft-text focus:outline-2 focus:-outline-offset-2 focus:theme-border sm:text-sm/6" placeholder="Search bookings" />
+          </div>
+        </th>
+        <th>
+          <div class="mt-2">
+            Dropoff
+            <input type="text" name="dropoff" id="dropoff" class="block w-3/4 rounded-md theme-surface px-2 py-0.5 text-base theme-text outline outline-1 -outline-offset-1 theme-soft-border placeholder:theme-soft-text focus:outline-2 focus:-outline-offset-2 focus:theme-border sm:text-sm/6" placeholder="Search bookings" />
+          </div>
+        </th>
         <th class="text-right">More details</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="transaction in transactions" :key="transaction.id">
-        <td class="relative py-5 pr-6">
+      <tr v-for="booking in bookings" :key="booking.id" class="border-b theme-soft-border">
+        <td class="relative py-3 pr-6">
           <div class="flex gap-x-6">
-            <component :is="transaction.icon" class="hidden h-6 w-5 flex-none text-gray-400 sm:block" aria-hidden="true" />
+            <component :is="booking.icon" class="hidden h-6 w-5 flex-none text-gray-400 sm:block" aria-hidden="true" />
             <div class="flex-auto">
               <div class="flex items-start gap-x-3">
-                <div class="text-sm/6 font-medium text-gray-900">{{ transaction.amount }}</div>
-                <div v-if="transaction.status === 'Paid'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ transaction.status }}</div>
-                <div v-if="transaction.status === 'Withdraw'" class="rounded-md bg-gray-50 px-2 py-1 text-xs font-medium text-gray-600 inset-ring inset-ring-gray-500/10">{{ transaction.status }}</div>
-                <div v-if="transaction.status === 'Overdue'" class="rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 inset-ring inset-ring-red-600/10">{{ transaction.status }}</div>
+                <div class="text-sm/6 font-medium text-gray-900">ID#{{ booking.bookingID }}</div>
+                <div v-if="booking.status.code === 'new'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ booking.status.name }}</div>
+                <div v-if="booking.status.code === 'shipped'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ booking.status.name }}</div>
               </div>
-              <div v-if="transaction.tax" class="mt-1 text-xs/5 text-gray-500">{{ transaction.tax }} tax</div>
+                <div class="mt-1 text-xs/5 text-gray-500">
+                    Project: <span class="text-gray-900">{{ booking.project }}</span>
+                </div>
             </div>
           </div>
-          <div class="absolute right-full bottom-0 h-px w-screen bg-gray-100"></div>
-          <div class="absolute bottom-0 left-0 h-px w-screen bg-gray-100"></div>
         </td>
-        <td class="hidden py-5 pr-6 sm:table-cell">
-          <div class="text-sm/6 text-gray-900">{{ transaction.client }}</div>
-          <div class="mt-1 text-xs/5 text-gray-500">{{ transaction.description }}</div>
+        <td class="hidden py-3 pr-6 sm:table-cell">
+          <div class="text-sm/6 text-gray-900">{{ booking.shippingResponsible }} / {{ booking.bookingResponsible }}</div>
         </td>
-        <td class="py-5 text-right">
-          <div class="flex justify-end">
-            <a :href="transaction.href" class="text-sm/6 font-medium text-indigo-600 hover:text-indigo-500"
-              >View<span class="hidden sm:inline"> transaction</span><span class="sr-only">, invoice #{{ transaction.bookingID }}, {{ transaction.client }}</span></a
-            >
-          </div>
-          <div class="mt-1 text-xs/5 text-gray-500">
-            Invoice <span class="text-gray-900">#{{ transaction.bookingID }}</span>
+        <td class="hidden py-3 pr-6 sm:table-cell">
+          <div class="text-sm/6 text-gray-900">{{ booking.shipmentDetails }}</div>
+        </td>
+        <td class="hidden py-3 pr-6 sm:table-cell">
+          <div class="text-sm/6 text-gray-900">{{ booking.pickup.adress + ', ' + booking.pickup.contry }} </div>
+          <div class="mt-1 text-xs/5 text-gray-500">ETA: {{ booking.pickup.expectedDate }}</div>
+        </td>
+        <td class="py-3 text-right">
+          <div class="flex">
+          <div class="text-sm/6 text-gray-900">{{ booking.dropoff }}</div>
+
           </div>
         </td>
       </tr>
@@ -71,8 +101,18 @@
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 import { ref } from 'vue'
 
+// Shipping team layout
+// const tabs = ref([
+//   { name: 'My Bookings', count: '12', current: true },
+//   { name: 'All Bookings', count: '52', current: false },
+//   { name: 'Unassigned', count: '8', current: false },
+//   { name: 'Completed', count: '6', current: false },
+// ])
+
+// Stakeholder layout
 const tabs = ref([
-  { name: 'Bookings', count: '52', current: true },
+  { name: 'My Bookings', count: '52', current: true },
+  { name: 'Team bookings', count: '52', current: false },
   { name: 'Completed', count: '6', current: false },
 ])
 
@@ -85,37 +125,55 @@ function switchTab(selectedTab) {
 
 
 
-import { ArrowDownCircleIcon, ArrowPathIcon, ArrowUpCircleIcon } from '@heroicons/vue/20/solid'
+import { ArrowDownCircleIcon, ArrowPathIcon, PaperAirplaneIcon } from '@heroicons/vue/20/solid'
 
-const transactions = [
+// Avalible status': New booking, Booking updated, Booking cancelled, Booking completed "Booking is sent, awaiting final documents"
+
+
+const bookings = [
       {
         id: 1,
-        bookingID: '00012',
-        amount: '$7,600.00 USD',
-        tax: '$500.00',
-        status: '',
-        client: 'Reform',
-        description: 'Website redesign',
-        icon: ArrowUpCircleIcon,
+        bookingID: '0012',
+        project: 'NN9423',
+        status: {
+            name: 'Shipped',
+            code: 'shipped'
+        },
+        description: 'Electronics - 20 pallets',
+        shippingResponsible: 'John Doe',
+        bookingResponsible: 'Alice Smith',
+        pickup: {
+            adress: 'Hamburg',
+            contry: 'Germany',
+            expectedDate: '2024-06-15'
+        },
+        shipmentDetails: '20 API, weight: 2000mg, \n volume: 1m³, temp: -100°C',
+        dropoff: 'Shanghai',
+
+        icon: PaperAirplaneIcon,
       },
       {
         id: 2,
-        bookingID: '00011',
-        amount: '$10,000.00 USD',
-        status: 'Withdraw',
-        client: 'Tom Cook',
-        description: 'Salary',
+        bookingID: '0013',
+        project: 'NN9424',
+        status: {
+            name: 'New',
+            code: 'new'
+        },
+        description: 'Chemicals - 10 pallets',
+        shippingResponsible: 'Jane Doe',
+        bookingResponsible: 'Bob Johnson',
+        pickup: {
+            adress: 'Rotterdam',
+            contry: 'Netherlands',
+            expectedDate: '2024-06-20'
+        },
+        shipmentDetails: '10 API, weight: 1000mg, \n volume: 0.5m³, temp: -80°C',
+        dropoff: 'Singapore',
+
         icon: ArrowDownCircleIcon,
       },
-      {
-        id: 3,
-        bookingID: '00009',
-        amount: '$2,000.00 USD',
-        tax: '$130.00',
-        status: 'Overdue',
-        client: 'Tuple',
-        description: 'Logo design',
-        icon: ArrowPathIcon,
-      },
+
+
     ]
 </script>
