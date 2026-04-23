@@ -78,24 +78,127 @@
             <div v-else-if="steps[1].status === 'current'">
               <div class="w-full flex justify-between gap-5">
                   <div class="w-full">
-                    <label for="business_area" class="block text-sm font-medium theme-text">Business Area</label>
+                    <label for="is_gmp" class="block text-sm font-medium theme-text ">Is GMP?</label>
                     <div class="mt-1">
-                      <input type="text" name="Business Area" id="business_area" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <input type="checkbox" name="Is GMP?" id="is_gmp" class="block rounded-md bg-white px-3 py-1.5 text-base text-gray-900  placeholder:text-gray-400" placeholder="" />
                     </div>
                   </div>
                   <div class="w-full">
-                    <label for="project_number" class="block text-sm font-medium theme-text">Project Number</label>
+                    <label for="Categorization" class="block text-sm font-medium theme-text">Categorization of material/chargo</label>
                     <div class="mt-1">
-                      <input type="text" name="Project Number" id="project_number" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <select type="text" name="Categorization" id="categ" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="">
+                        <option value="">Select categorization</option>
+                        <option value="1">Category 1</option>
+                        <option value="2">Category 2</option>
+                        <option value="3">Category 3</option>
+                      </select>
                     </div>
                   </div>
                   <div class="w-full">
-                    <label for="expected_shipment_date" class="block text-sm font-medium theme-text">Expected Shipment Date</label>
+                    <label for="shipping_temperature" class="block text-sm font-medium theme-text">Shipping temperature</label>
                     <div class="mt-1">
-                      <input type="date" name="expected_shipment_date" id="expected_shipment_date" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <select type="text" name="shipping_temperature" id="shipping_temperature" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="">
+                        <option value="">Select shipping temperature</option>
+                        <option value="ambient">Ambient</option>
+                        <option value="refrigerated">Refrigerated</option>
+                        <option value="frozen">Frozen</option>
+                      </select>
+
                     </div>
                   </div>
               </div>
+              <div class="flex justify-between gap-5 mt-5">
+                  <div class="w-full">
+                    <label for="gross_weight" class="block text-sm font-medium theme-text">Gross weight</label>
+                    <div class="mt-1 flex">
+                      <input type="number" name="gross_weight" id="gross_weight" class="block w-full rounded-l-md border-r-0 bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <select name="gross_weight_unit" id="gross_weight_unit" class="block rounded-r-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border">
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="mg">mg</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <label for="total_colli" class="block text-sm font-medium theme-text">total number of colli</label>
+
+                    <input type="number" name="total_colli" id="total_colli" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                  </div>
+                  <div class="min-w-1/3"></div>
+              </div>
+              <div class="mt-6">
+                <div class="flex items-center justify-between">
+                  <h4 class="theme-text text-sm font-semibold">Cargo details</h4>
+                  <button type="button" @click="addCargoItem" class="theme-nav inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">
+                    Add
+                  </button>
+                </div>
+                <div class="mt-3 overflow-x-auto rounded-md border theme-soft-border">
+                  <table class="w-full border-collapse bg-white">
+                    <thead>
+                      <tr class="theme-soft-text text-left text-sm">
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Item no</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Material name</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Batch number</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">CMO batch number</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Quantity</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Item type</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Net weight</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Country origin</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">HS/HTS code</th>
+                        <th class="border-b theme-soft-border px-2 py-2 font-medium">Total price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="item in cargoItems" :key="item.rowId" class="align-top">
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.itemNo" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.materialName" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.batchNumber" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.cmoBatchNumber" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.quantity" type="number" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <select v-model="item.itemType" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border">
+                            <option value="">Select type</option>
+                            <option value="raw-material">Raw material</option>
+                            <option value="finished-good">Finished good</option>
+                            <option value="sample">Sample</option>
+                          </select>
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <div class="flex">
+                          <input v-model="item.netWeight" type="number" class="block w-full rounded-l-md border-r-0 bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                          <select v-model="item.weightUnit" class="block rounded-r-md bg-white px-3 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border">
+                            <option value="kg">kg</option>
+                            <option value="g">g</option>
+                            <option value="mg">mg</option>
+                          </select>
+                          </div>  
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.countryOrigin" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.hsHtsCode" type="text" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                        <td class="border-b theme-soft-border p-2">
+                          <input v-model="item.totalPrice" type="number" step="0.01" class="block w-full rounded-md bg-white px-2 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              
             </div>
             <div v-else-if="steps[2].status === 'current'">
 
@@ -120,6 +223,32 @@
 <script setup>
 import { computed, ref } from 'vue';
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
+
+const cargoRowCounter = ref(2)
+
+function createCargoItem(rowId) {
+  return {
+    rowId,
+    itemNo: '',
+    materialName: '',
+    batchNumber: '',
+    cmoBatchNumber: '',
+    quantity: '',
+    itemType: '',
+    netWeight: '',
+    weightUnit: 'kg',
+    countryOrigin: '',
+    hsHtsCode: '',
+    totalPrice: '',
+  }
+}
+
+const cargoItems = ref([createCargoItem(1)])
+
+function addCargoItem() {
+  cargoItems.value.unshift(createCargoItem(cargoRowCounter.value))
+  cargoRowCounter.value += 1
+}
 
 
 const steps = ref([
