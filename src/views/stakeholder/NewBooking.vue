@@ -201,6 +201,189 @@
               
             </div>
             <div v-else-if="steps[2].status === 'current'">
+              <div class="space-y-6">
+
+              <div class="rounded-md border theme-soft-border bg-white p-4">
+                <h2 class="theme-text text-lg font-semibold">
+                  Sender/Consignor information
+                </h2>
+                
+                <div class="mt-3">
+                  <label for="sender_pickup_address" class="block text-sm font-medium theme-text">Sender - Pick-up address</label>
+                  <div class="mt-1">
+                  <select
+                    id="sender_pickup_address"
+                    name="sender_pickup_address"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border"
+                  >
+                    <option value="">Select pick-up address</option>
+                    <option value="copenhagen">Copenhagen, Denmark</option>
+                    <option value="aarhus">Aarhus, Denmark</option>
+                    <option value="malmo">Malmö, Sweden</option>
+                  </select>
+                  </div>
+                </div>
+              
+                <div class="flex gap-5 mt-3">
+                    <div class="w-full">
+                    <label for="sender_contact_name" class="block text-sm font-medium theme-text">Contact full name</label>
+                    <div class="mt-1">
+                    <input
+                      type="text"
+                      id="sender_contact_name"
+                      name="sender_contact_name"
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                      placeholder="Enter full name"
+                    />
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <label for="sender_contact_email" class="block text-sm font-medium theme-text">Contact e-mail</label>
+                    <div class="mt-1">
+                    <input
+                      type="email"
+                      id="sender_contact_email"
+                      name="sender_contact_email"
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                      placeholder="name@example.com"
+                    />
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <label for="sender_contact_phone" class="block text-sm font-medium theme-text">Contact phone number</label>
+                    <div class="mt-1">
+                    <input
+                      type="tel"
+                      id="sender_contact_phone"
+                      name="sender_contact_phone"
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                      placeholder="+45 12 34 56 78"
+                    />
+                    </div>
+                  </div>
+                </div>
+                <div class="flex gap-5 mt-3">
+                  <div class="w-full">
+                    <label for="sender_vat_number" class="block text-sm font-medium theme-text">VAT number</label>
+                    <div class="mt-1">
+                    <input
+                      type="text"
+                      id="sender_vat_number"
+                      name="sender_vat_number"
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                      placeholder="VAT number"
+                    />
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <label for="sender_pickup_reference" class="block text-sm font-medium theme-text">Pick-up reference number</label>
+                    <div class="mt-1">
+                    <input
+                      type="text"
+                      id="sender_pickup_reference"
+                      name="sender_pickup_reference"
+                      class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                      placeholder="Reference number"
+                    />
+                    </div>
+                  </div>
+                </div>
+              
+              </div>
+
+                <div class="rounded-md border theme-soft-border bg-white p-4">
+                <h2 class="theme-text text-lg font-semibold">
+                  Receiver/Consignee information
+                </h2>
+
+                <div class="mt-3">
+                  <label for="receiver_delivery_address" class="block text-sm font-medium theme-text">Receiver - Delivery address</label>
+                  <div class="mt-1">
+                  <select
+                    id="receiver_delivery_address"
+                    name="receiver_delivery_address"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border"
+                  >
+                    <option value="">Select delivery address</option>
+                    <option value="copenhagen">Copenhagen, Denmark</option>
+                    <option value="aarhus">Aarhus, Denmark</option>
+                    <option value="malmo">Malmö, Sweden</option>
+                  </select>
+                  </div>
+                </div>
+
+                <div class="flex gap-5 mt-3">
+                  <div class="w-full">
+                  <label for="receiver_contact_name" class="block text-sm font-medium theme-text">Contact full name</label>
+                  <div class="mt-1">
+                    <input
+                    type="text"
+                    id="receiver_contact_name"
+                    name="receiver_contact_name"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="Enter full name"
+                    />
+                  </div>
+                  </div>
+                  <div class="w-full">
+                  <label for="receiver_contact_email" class="block text-sm font-medium theme-text">Contact e-mail</label>
+                  <div class="mt-1">
+                    <input
+                    type="email"
+                    id="receiver_contact_email"
+                    name="receiver_contact_email"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="name@example.com"
+                    />
+                  </div>
+                  </div>
+                  <div class="w-full">
+                  <label for="receiver_contact_phone" class="block text-sm font-medium theme-text">Contact phone number</label>
+                  <div class="mt-1">
+                    <input
+                    type="tel"
+                    id="receiver_contact_phone"
+                    name="receiver_contact_phone"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="+45 12 34 56 78"
+                    />
+                  </div>
+                  </div>
+                </div>
+
+                <div class="flex gap-5 mt-3">
+                  <div class="w-full">
+                  <label for="receiver_vat_number" class="block text-sm font-medium theme-text">VAT number</label>
+                  <div class="mt-1">
+                    <input
+                    type="text"
+                    id="receiver_vat_number"
+                    name="receiver_vat_number"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="VAT number"
+                    />
+                  </div>
+                  </div>
+                  <div class="w-full">
+                  <label for="receiver_delivery_reference" class="block text-sm font-medium theme-text">Delivery reference number</label>
+                  <div class="mt-1">
+                    <input
+                    type="text"
+                    id="receiver_delivery_reference"
+                    name="receiver_delivery_reference"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="Reference number"
+                    />
+                  </div>
+                  </div>
+                </div>
+                </div>
+                <div>
+                  General shipping comment
+                  
+                    <textarea name="comment" id="comment" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder=""></textarea>
+                </div>
+            </div>
 
             </div>
             <div v-else-if="steps[3].status === 'current'">
