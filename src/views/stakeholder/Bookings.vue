@@ -54,7 +54,7 @@
     </thead>
     <tbody>
       <tr v-for="booking in bookings" :key="booking.id" class="border-b theme-soft-border">
-        <td class="relative py-3 pr-6">
+        <td class="relative py-1.5 pr-6">
           <div class="flex gap-x-6">
             <component :is="booking.icon" class="hidden h-6 w-5 flex-none text-gray-400 sm:block" aria-hidden="true" />
             <div class="flex-auto">
@@ -63,28 +63,29 @@
                 <div v-if="booking.status.code === 'new'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ booking.status.name }}</div>
                 <div v-if="booking.status.code === 'shipped'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ booking.status.name }}</div>
               </div>
-                <div class="mt-1 text-xs/5 text-gray-500">
+                <div class="mt-0.5 text-xs/5 text-gray-500">
                     Project: <span class="text-gray-900">{{ booking.project }}</span>
                 </div>
             </div>
           </div>
         </td>
-        <td class="hidden py-3 pr-6 sm:table-cell">
+        <td class="hidden py-1.5 pr-6 sm:table-cell">
           <div class="text-sm/6 text-gray-900">{{ booking.shippingResponsible }} / {{ booking.bookingResponsible }}</div>
         </td>
-        <td class="hidden py-3 pr-6 sm:table-cell">
+        <td class="hidden py-1.5 pr-6 sm:table-cell">
           <div class="text-sm/6 text-gray-900">{{ booking.shipmentDetails }}</div>
         </td>
-        <td class="hidden py-3 pr-6 sm:table-cell">
+        <td class="hidden py-1.5 pr-6 sm:table-cell">
           <div class="text-sm/6 text-gray-900">{{ booking.pickup.adress + ', ' + booking.pickup.contry }} </div>
-          <div class="mt-1 text-xs/5 text-gray-500">ETA: {{ booking.pickup.expectedDate }}</div>
+          <div class="mt-0.5 text-xs/5 text-gray-500">ETA: {{ booking.pickup.expectedDate }}</div>
         </td>
-        <td class="py-3 text-right">
-          <div class="flex">
-          <div class="text-sm/6 text-gray-900">{{ booking.dropoff }}</div>
-
-          </div>
+        <td class="py-1.5">
+          <div class="text-sm/6 text-gray-900">{{ booking.dropoff.adress + ', ' + booking.dropoff.contry }} </div>
+          <div class="mt-0.5 text-xs/5 text-gray-500">ETA: {{ booking.dropoff.expectedDate }}</div>
         </td>
+          <td class="py-1.5 text-right">
+            <a href="#" class="text-sm/6 font-semibold theme-text hover:opacity-90">View<span class="sr-only">, {{ booking.bookingID }}</span></a>
+          </td>
       </tr>
     </tbody>
   </table>
@@ -148,7 +149,11 @@ const bookings = [
             expectedDate: '2024-06-15'
         },
         shipmentDetails: '20 API, weight: 2000mg, \n volume: 1m³, temp: -100°C',
-        dropoff: 'Shanghai',
+        dropoff: {
+            adress: 'Shanghai',
+            contry: 'China',
+            expectedDate: '2024-06-25'
+        },
 
         icon: PaperAirplaneIcon,
       },
@@ -169,7 +174,11 @@ const bookings = [
             expectedDate: '2024-06-20'
         },
         shipmentDetails: '10 API, weight: 1000mg, \n volume: 0.5m³, temp: -80°C',
-        dropoff: 'Singapore',
+        dropoff: {
+            adress: 'Singapore',
+            contry: 'Singapore',
+            expectedDate: '2024-06-30'
+        },
 
         icon: ArrowDownCircleIcon,
       },
