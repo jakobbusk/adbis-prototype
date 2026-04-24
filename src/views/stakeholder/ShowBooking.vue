@@ -6,7 +6,7 @@
       <div class="lg:flex lg:items-center lg:justify-between">
         <div class="min-w-0 flex-1">
           <h2 class="font-bold text-gray-900 text-3xl flex items-center gap-4">
-            ID#{{ booking.id }}
+            ID#{{ bookingId }}
             <span class="rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 inset-ring inset-ring-blue-600/20">{{ booking.status }}</span>
           </h2>
           <div class="mt-1 flex flex-col sm:mt-0 sm:flex-row sm:flex-wrap sm:space-x-6">
@@ -43,17 +43,13 @@
               <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mr-1.5 -ml-0.5 size-5 text-gray-400">
                 <path d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
               </svg>
-              Edit
+              Edit booking
             </button>
           </span>
 
           <span class="ml-3 hidden sm:block">
             <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50">
-              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mr-1.5 -ml-0.5 size-5 text-gray-400">
-                <path d="M12.232 4.232a2.5 2.5 0 0 1 3.536 3.536l-1.225 1.224a.75.75 0 0 0 1.061 1.06l1.224-1.224a4 4 0 0 0-5.656-5.656l-3 3a4 4 0 0 0 .225 5.865.75.75 0 0 0 .977-1.138 2.5 2.5 0 0 1-.142-3.667l3-3Z" />
-                <path d="M11.603 7.963a.75.75 0 0 0-.977 1.138 2.5 2.5 0 0 1 .142 3.667l-3 3a2.5 2.5 0 0 1-3.536-3.536l1.225-1.224a.75.75 0 0 0-1.061-1.06l-1.224 1.224a4 4 0 1 0 5.656 5.656l3-3a4 4 0 0 0-.225-5.865Z" />
-              </svg>
-              View
+              Send QA documents
             </button>
           </span>
 
@@ -62,7 +58,7 @@
               <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mr-1.5 -ml-0.5 size-5">
                 <path d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" fill-rule="evenodd" />
               </svg>
-              Publish
+              Complete
             </button>
           </span>
 
@@ -86,7 +82,7 @@
       <div class="w-full grid  grid-rows-1 items-start gap-x-8 gap-y-8 grid-cols-3">
       <div>
         <!-- Activity feed -->
-        <h2 class="text-sm/6 font-semibold text-gray-900">Activity</h2>
+        <h2 class="text-sm/6 font-semibold text-gray-900">Timeline</h2>
         <ul role="list" class="mt-6 space-y-6">
           <li class="relative flex gap-x-4">
             <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
@@ -255,6 +251,7 @@
 <script setup>
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 import { ref } from 'vue'
+import { useRoute } from 'vue-router';
 
 // Fetch localhost:3000/api/booking/0021 and replace the mock data with the response from the API call
 
@@ -263,6 +260,7 @@ const tabs = ref([
   { name: 'Booking information', current: true },
   { name: 'Tracking', current: false },
   { name: 'Items', current: false },
+  { name: 'Documents', current: false,},
 ])
 
 // Function to switch tabs and update the current state
@@ -271,6 +269,11 @@ function switchTab(selectedTab) {
     tab.current = (tab.name === selectedTab.name);
   });
 }
+
+// Hent router params for booking ID and fetch booking data from API
+const route = useRoute();
+const bookingId = route.params.id;
+
 
 // Mock data in this format the moment, to be replaced by API calls later on
 const booking = {

@@ -95,7 +95,7 @@
           <div class="mt-0.5 text-xs/5 text-gray-500">ETA: {{ booking.dropoff.expectedDate }}</div>
         </td>
           <td class="py-1.5 text-right">
-            <a href="#" class="text-sm/6 font-semibold theme-text hover:opacity-90">View<span class="sr-only">, {{ booking.bookingID }}</span></a>
+            <a :href="'/stakeholder/bookings/' + booking.bookingID" class="text-sm/6 font-semibold theme-text hover:opacity-90">View<span class="sr-only">, {{ booking.bookingID }}</span></a>
           </td>
       </tr>
     </tbody>
