@@ -6,7 +6,7 @@
       <div class="flex h-16 items-center justify-between">
         <div class="flex items-center">
           <div class="shrink-0 text-white font-bold text-lg">
-            Bookings 4 Shippings
+            B4S - Stakeholder Portal
           </div>
           <div class="hidden md:block">
             <div class="ml-10 flex items-baseline space-x-4">
