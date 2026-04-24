@@ -66,7 +66,9 @@
                   <div v-if="booking.status.code === 'approved-qa'" class="rounded-md bg-emerald-50 px-2 py-1 text-xs font-medium text-emerald-700 inset-ring inset-ring-emerald-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'rejected-qa'" class="rounded-md bg-rose-50 px-2 py-1 text-xs font-medium text-rose-700 inset-ring inset-ring-rose-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'shipment-ready'" class="rounded-md bg-cyan-50 px-2 py-1 text-xs font-medium text-cyan-700 inset-ring inset-ring-cyan-600/20">{{ booking.status.name }}</div>
+                  <div v-if="booking.status.code === 'shipment-ready-awaiting-qa'" class="rounded-md bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700 inset-ring inset-ring-amber-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'shipment-booked'" class="rounded-md bg-indigo-50 px-2 py-1 text-xs font-medium text-indigo-700 inset-ring inset-ring-indigo-600/20">{{ booking.status.name }}</div>
+                  <div v-if="booking.status.code === 'shipment-booked-awaiting-qa'" class="rounded-md bg-amber-50 px-2 py-1 text-xs font-medium text-amber-700 inset-ring inset-ring-amber-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'in-transit'" class="rounded-md bg-violet-50 px-2 py-1 text-xs font-medium text-violet-700 inset-ring inset-ring-violet-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'final-qa'" class="rounded-md bg-orange-50 px-2 py-1 text-xs font-medium text-orange-700 inset-ring inset-ring-orange-600/20">{{ booking.status.name }}</div>
                   <div v-if="booking.status.code === 'completed'" class="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 inset-ring inset-ring-green-600/20">{{ booking.status.name }}</div>
@@ -197,7 +199,7 @@ const bookings = [
   {
     id: 2,
     bookingID: '0013',
-    project: 'NN9424',
+    project: 'NN9423',
     status: { name: 'New', code: 'new' },
     description: 'Chemicals - 10 pallets',
     shippingResponsible: 'Jane Doe',
@@ -254,11 +256,36 @@ const bookings = [
     shipmentDetails: '16 API, weight: 1600mg, volume: 1.2m3, temp: 4C',
     dropoff: { adress: 'Sao Paulo', contry: 'Brazil', expectedDate: '2026-05-30' },
   },
+    {
+    id: 6,
+    bookingID: '0017',
+    project: 'NN9428',
+    status: { name: 'Shipment ready, Awaiting QA', code: 'shipment-ready-awaiting-qa' },
+    description: 'Sterile bags - 16 pallets',
+    shippingResponsible: 'John Doe',
+    bookingResponsible: 'Stefanie Jensen',
+    pickup: { adress: 'Antwerp', contry: 'Belgium', expectedDate: '2026-05-20' },
+    shipmentDetails: '16 API, weight: 1600mg, volume: 1.2m3, temp: 4C',
+    dropoff: { adress: 'Sao Paulo', contry: 'Brazil', expectedDate: '2026-05-30' },
+  },
   {
     id: 7,
     bookingID: '0018',
     project: 'NN9429',
     status: { name: 'Shipment booked', code: 'shipment-booked' },
+    description: 'Vials - 14 pallets',
+    shippingResponsible: 'Jane Doe',
+    bookingResponsible: 'Stefanie Jensen',
+    pickup: { adress: 'Hamburg', contry: 'Germany', expectedDate: '2026-05-21' },
+    shipmentDetails: '14 API, weight: 1400mg, volume: 1.1m3, temp: -5C',
+    dropoff: { adress: 'Shanghai', contry: 'China', expectedDate: '2026-05-31' },
+  },
+
+  {
+    id: 7,
+    bookingID: '0018',
+    project: 'NN9429',
+    status: { name: 'Shipment booked, Awaiting QA', code: 'shipment-booked-awaiting-qa' },
     description: 'Vials - 14 pallets',
     shippingResponsible: 'Jane Doe',
     bookingResponsible: 'Stefanie Jensen',

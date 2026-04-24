@@ -29,8 +29,9 @@ npm install
 
 ```sh
 npm run dev
-```
 
+```
+Åben http://localhost:5173/stakeholder/dashboard i din browser
 ### Compile and Minify for Production
 
 ```sh
