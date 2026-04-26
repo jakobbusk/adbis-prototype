@@ -95,7 +95,7 @@
           <div class="mt-0.5 text-xs/5 text-gray-500">ETA: {{ booking.dropoff.expectedDate }}</div>
         </td>
           <td class="py-1.5 text-right">
-            <a :href="'/stakeholder/bookings/' + booking.bookingID" class="text-sm/6 font-semibold theme-text hover:opacity-90">View<span class="sr-only">, {{ booking.bookingID }}</span></a>
+            <router-link :to="'/stakeholder/bookings/' + booking.bookingID" class="text-sm/6 font-semibold theme-text hover:opacity-90">View<span class="sr-only">, {{ booking.bookingID }}</span></router-link>
           </td>
       </tr>
     </tbody>
@@ -186,7 +186,7 @@ const filteredBookings = computed(() => {
 const bookings = [
   {
     id: 1,
-    bookingID: '0012',
+    bookingID: '1',
     project: 'NN9423',
     status: { name: 'Draft', code: 'draft' },
     description: 'Electronics - 20 pallets',
@@ -198,7 +198,7 @@ const bookings = [
   },
   {
     id: 2,
-    bookingID: '0013',
+    bookingID: '2',
     project: 'NN9423',
     status: { name: 'New', code: 'new' },
     description: 'Chemicals - 10 pallets',
@@ -210,7 +210,7 @@ const bookings = [
   },
   {
     id: 3,
-    bookingID: '0014',
+    bookingID: '3',
     project: 'NN9425',
     status: { name: 'Awaiting QA', code: 'awaiting-qa' },
     description: 'Biologics - 8 pallets',
@@ -222,7 +222,7 @@ const bookings = [
   },
   {
     id: 4,
-    bookingID: '0015',
+    bookingID: '4',
     project: 'NN9426',
     status: { name: 'Approved QA', code: 'approved-qa' },
     description: 'Reagents - 12 pallets',
@@ -234,7 +234,7 @@ const bookings = [
   },
   {
     id: 5,
-    bookingID: '0016',
+    bookingID: '5',
     project: 'NN9427',
     status: { name: 'Rejected QA', code: 'rejected-qa' },
     description: 'Medical kits - 6 pallets',
@@ -246,7 +246,7 @@ const bookings = [
   },
   {
     id: 6,
-    bookingID: '0017',
+    bookingID: '6',
     project: 'NN9428',
     status: { name: 'Shipment ready', code: 'shipment-ready' },
     description: 'Sterile bags - 16 pallets',

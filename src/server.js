@@ -10,6 +10,14 @@ app.listen(PORT, () => {
 });
 app.use(express.json());
 
+// Set cors headers to allow requests from localhost:5173 (Vue frontend)
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
+
 //Database her SQLITE (better-sqlite3)
 const options = {
   verbose: console.log,
@@ -33,16 +41,6 @@ db.prepare(`
 
 
 // API routes her
-//post to add a new timeline entry
-app.post('/api/timeline', (req, res) => {
-    const { bookingId, message, type, sender } = req.body;
-    const stmt = db.prepare(`
-        INSERT INTO Timeline (bookingId, message, type, sender)
-        VALUES (?, ?, ?, ?)
-    `);
-    stmt.run(bookingId, message, type, sender);
-    res.status(201).json({ success: true });
-});
 //get all timeline entires from the past 7 days
 app.get('/api/timeline/recent', (req, res) => {
     const stmt = db.prepare(`
@@ -60,7 +58,21 @@ app.get('/api/timeline/:bookingId', (req, res) => {
     const timelineEntries = stmt.all(bookingId);
     res.status(200).json(timelineEntries);
 });
+//post to add a new timeline entry
+app.post('/api/timeline/:bookingId', (req, res) => {
+    const { bookingId } = req.params;
+    const { message, type, sender } = req.body;
+    const stmt = db.prepare(`
+        INSERT INTO Timeline (bookingId, message, type, sender)
+        VALUES (?, ?, ?, ?)
+    `);
+    stmt.run(bookingId, message, type, sender);
+    res.status(201).json({ success: true });
+});
 
+// Kun kør en gang hvis table er tom, for at tilføje mockdata
+const count = db.prepare('SELECT COUNT(*) AS count FROM Timeline').get().count;
+if (count === 0) {
 
 //add mockdata to Timeline table
 //bookingId: 1, message: 'Koordineret i telefon, at forwarder sørger for temp. sensor', type: 'comment', sender: 'John Doe', createdAt: '2026-04-01 09:45:00'
@@ -78,3 +90,4 @@ db.prepare(`
     INSERT INTO Timeline (bookingId, message, type, sender, createdAt)
     VALUES ('1', 'Out for delivery', 'notification', 'DHL', '2026-04-20 12:30:00')
 `).run();
+}

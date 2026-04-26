@@ -61,21 +61,6 @@
               Complete
             </button>
           </span>
-
-          <!-- Dropdown -->
-          <el-dropdown class="relative ml-3 sm:hidden">
-            <button class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50">
-              More
-              <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="-mr-1 ml-1.5 size-5 text-gray-400">
-                <path d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" fill-rule="evenodd" />
-              </svg>
-            </button>
-
-            <el-menu anchor="bottom start" popover class="-mr-1 w-24 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-200 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Edit</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">View</a>
-            </el-menu>
-          </el-dropdown>
         </div>
       </div>
 
@@ -84,80 +69,40 @@
         <!-- Activity feed -->
         <h2 class="text-sm/6 font-semibold text-gray-900">Timeline</h2>
         <ul role="list" class="mt-6 space-y-6">
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
+          <li v-for="(item, index) in timeline" :key="item.id" class="relative flex gap-x-4">
+            <div v-if="index !== timeline.length - 1" class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
               <div class="w-px bg-gray-200"></div>
             </div>
-            <div class="relative flex size-6 flex-none items-center justify-center bg-white">
-              <div class="size-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
-            </div>
-            <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Chelsea Hagon</span> created the invoice.</p>
-            <time datetime="2023-01-23T10:32" class="flex-none py-0.5 text-xs/5 text-gray-500">7d ago</time>
-          </li>
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
-              <div class="w-px bg-gray-200"></div>
-            </div>
-            <div class="relative flex size-6 flex-none items-center justify-center bg-white">
-              <div class="size-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
-            </div>
-            <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Chelsea Hagon</span> edited the invoice.</p>
-            <time datetime="2023-01-23T11:03" class="flex-none py-0.5 text-xs/5 text-gray-500">6d ago</time>
-          </li>
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
-              <div class="w-px bg-gray-200"></div>
-            </div>
-            <div class="relative flex size-6 flex-none items-center justify-center bg-white">
-              <div class="size-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
-            </div>
-            <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Chelsea Hagon</span> sent the invoice.</p>
-            <time datetime="2023-01-23T11:24" class="flex-none py-0.5 text-xs/5 text-gray-500">6d ago</time>
-          </li>
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
-              <div class="w-px bg-gray-200"></div>
-            </div>
-            <img src="https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="relative mt-3 size-6 flex-none rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5" />
-            <div class="flex-auto rounded-md p-3 ring-1 ring-gray-200 ring-inset">
-              <div class="flex justify-between gap-x-4">
-                <div class="py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Chelsea Hagon</span> commented</div>
-                <time datetime="2023-01-23T15:56" class="flex-none py-0.5 text-xs/5 text-gray-500">3d ago</time>
+            <div v-if="item.type === 'comment'" class="contents">
+              <div class="relative flex size-6 flex-none items-center justify-center rounded-full bg-indigo-50 text-indigo-600 ring-1 ring-indigo-200">
+                <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" class="size-4">
+                  <path d="M2 5.5A2.5 2.5 0 0 1 4.5 3h11A2.5 2.5 0 0 1 18 5.5v6A2.5 2.5 0 0 1 15.5 14H9.414l-3.707 3.707A1 1 0 0 1 4 17v-3H4.5A2.5 2.5 0 0 1 2 11.5v-6Z" />
+                </svg>
               </div>
-              <p class="text-sm/6 text-gray-500">Called client, they reassured me the invoice would be paid by the 25th.</p>
+              <div class="flex-auto rounded-md p-3 ring-1 ring-gray-200 ring-inset">
+                <div class="flex justify-between gap-x-4">
+                  <div class="py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">{{ item.sender }}</span> commented</div>
+                  <time :datetime="item.createdAt" class="flex-none py-0.5 text-xs/5 text-gray-500">{{ item.createdAt }}</time>
+                </div>
+                <p class="text-sm/6 text-gray-500">{{ item.message }}</p>
+              </div>
             </div>
-          </li>
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 -bottom-6 left-0 flex w-6 justify-center">
-              <div class="w-px bg-gray-200"></div>
+
+            <div v-else class="contents">
+              <div class="relative flex size-6 flex-none items-center justify-center rounded-full bg-gray-100 ring-1 ring-gray-300">
+                <div class="size-1.5 rounded-full bg-gray-500"></div>
+              </div>
+              <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">{{ item.sender }}</span> {{ item.message }}</p>
+              <time :datetime="item.createdAt" class="flex-none py-0.5 text-xs/5 text-gray-500">{{ item.createdAt }}</time>
             </div>
-            <div class="relative flex size-6 flex-none items-center justify-center bg-white">
-              <div class="size-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300"></div>
-            </div>
-            <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Alex Curren</span> viewed the invoice.</p>
-            <time datetime="2023-01-24T09:12" class="flex-none py-0.5 text-xs/5 text-gray-500">2d ago</time>
-          </li>
-          <li class="relative flex gap-x-4">
-            <div class="absolute top-0 left-0 flex h-6 w-6 justify-center">
-              <div class="w-px bg-gray-200"></div>
-            </div>
-            <div class="relative flex size-6 flex-none items-center justify-center bg-white">
-              <svg viewBox="0 0 24 24" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-6 text-indigo-600">
-                <path d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm13.36-1.814a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 12.22a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clip-rule="evenodd" fill-rule="evenodd" />
-              </svg>
-            </div>
-            <p class="flex-auto py-0.5 text-xs/5 text-gray-500"><span class="font-medium text-gray-900">Alex Curren</span> paid the invoice.</p>
-            <time datetime="2023-01-24T09:20" class="flex-none py-0.5 text-xs/5 text-gray-500">1d ago</time>
           </li>
         </ul>
 
-        <!-- New comment form -->
         <div class="mt-6 flex gap-x-3">
-          <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" class="size-6 flex-none rounded-full bg-gray-100 outline -outline-offset-1 outline-black/5" />
-          <form action="#" class="relative flex-auto">
+          <form @submit.prevent="postTimelineComment" class="relative flex-auto">
             <div class="overflow-hidden rounded-lg pb-12 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-indigo-600">
               <label for="comment" class="sr-only">Add your comment</label>
-              <textarea id="comment" name="comment" rows="2" placeholder="Add your comment..." class="block w-full resize-none bg-transparent px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"></textarea>
+              <textarea v-model="newComment" id="comment" name="comment" rows="2" placeholder="Add your comment..." class="block w-full resize-none bg-transparent px-3 py-1.5 text-base text-gray-900 placeholder:text-gray-400 focus:outline-none sm:text-sm/6"></textarea>
             </div>
 
             <div class="absolute inset-x-0 bottom-0 flex justify-between py-2 pr-2 pl-3">
@@ -167,12 +112,11 @@
                     <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="size-5">
                       <path d="M15.621 4.379a3 3 0 0 0-4.242 0l-7 7a3 3 0 0 0 4.241 4.243h.001l.497-.5a.75.75 0 0 1 1.064 1.057l-.498.501-.002.002a4.5 4.5 0 0 1-6.364-6.364l7-7a4.5 4.5 0 0 1 6.368 6.36l-3.455 3.553A2.625 2.625 0 1 1 9.52 9.52l3.45-3.451a.75.75 0 1 1 1.061 1.06l-3.45 3.451a1.125 1.125 0 0 0 1.587 1.595l3.454-3.553a3 3 0 0 0 0-4.242Z" clip-rule="evenodd" fill-rule="evenodd" />
                     </svg>
-                    <span class="sr-only">Attach a file</span>
                   </button>
                 </div>
 
               </div>
-              <button type="submit" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50">Comment</button>
+              <button type="submit" :disabled="isPosting || !newComment.trim()" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-xs inset-ring-1 inset-ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50">{{ isPosting ? 'Posting...' : 'Comment' }}</button>
             </div>
           </form>
         </div>
@@ -252,8 +196,58 @@
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 import { ref } from 'vue'
 import { useRoute } from 'vue-router';
+// Hent router params for booking ID and fetch booking data from API
+const route = useRoute();
+const bookingId = route.params.id;
+const timeline = ref([]);
+const newComment = ref('');
+const isPosting = ref(false);
+const currentSender = ref('John Doe');
+// Fetch timeline
+async function fetchTimeline() {
+  try {
+    const response = await fetch(`http://localhost:3000/api/timeline/${bookingId}`);
+    const timelineData = await response.json();
+    timeline.value = timelineData;
+  } catch (error) {
+    console.error('Error fetching timeline:', error);
+    alert('Failed to load timeline data. Please try again later.');
+  }
+}
+fetchTimeline();
 
-// Fetch localhost:3000/api/booking/0021 and replace the mock data with the response from the API call
+async function postTimelineComment() {
+  const message = newComment.value.trim();
+  if (!message || isPosting.value) return;
+
+  isPosting.value = true;
+  try {
+    const response = await fetch(`http://localhost:3000/api/timeline/${bookingId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        message,
+        type: 'comment',
+        sender: currentSender.value,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to post comment');
+    }
+
+    newComment.value = '';
+    await fetchTimeline();
+  } catch (error) {
+    console.error('Error posting timeline comment:', error);
+    alert('Failed to post comment. Please try again later.');
+  } finally {
+    isPosting.value = false;
+  }
+}
+
 
 // tabs
 const tabs = ref([
@@ -269,10 +263,6 @@ function switchTab(selectedTab) {
     tab.current = (tab.name === selectedTab.name);
   });
 }
-
-// Hent router params for booking ID and fetch booking data from API
-const route = useRoute();
-const bookingId = route.params.id;
 
 
 // Mock data in this format the moment, to be replaced by API calls later on
