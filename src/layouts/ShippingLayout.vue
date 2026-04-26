@@ -109,10 +109,10 @@ import { XMarkIcon } from '@heroicons/vue/24/outline'
 const route = useRoute()
 
 const navItems = [
-  {
-    label: 'Dashboard',
-    to: '/shipping/dashboard'
-  },
+  // {
+  //   label: 'Dashboard',
+  //   to: '/shipping/dashboard'
+  // },
   {
     label: 'Bookings',
     to: '/shipping/bookings'
