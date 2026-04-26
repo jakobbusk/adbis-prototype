@@ -133,16 +133,142 @@
               </nav>
             </div>
           </div>
-          <div v-show="tabs[0].current" class="">
+          <div v-show="tabs[0].current" class="space-y-8">
 
-            <div class="flex justify-between">
-              <div >
-                <div class="font-semibold text-gray-900">Pickup Location</div>
-                <div class="mt-2 text-gray-500"><span class="font-medium text-gray-900">{{ booking.senderContactName }}</span><br />{{ booking.senderPickupAddress }}<br />{{ booking.senderContactEmail }}<br />{{ booking.senderContactPhone }}</div>
+            <!-- Project Details Section -->
+            <div class="grid grid-cols-3 gap-6">
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Project Number</div>
+                <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.projectNumber }}</div>
               </div>
-              <div >
-                <div class="font-semibold text-gray-900">Delivery Location</div>
-                <div class="mt-2 text-gray-500"><span class="font-medium text-gray-900">{{ booking.receiverContactName }}</span><br />{{ booking.receiverDeliveryAddress }}<br />{{ booking.receiverContactEmail }}<br />{{ booking.receiverContactPhone }}</div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Business Area</div>
+                <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.businessArea }}</div>
+              </div>
+              <div>
+                <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Cost Center</div>
+                <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.costCenter }}</div>
+              </div>
+            </div>
+
+            <!-- Shipment Details Section -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Shipment Details</h3>
+              <div class="grid grid-cols-4 gap-6">
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Expected Shipment</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.expectedShipmentDate }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Temperature</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.shippingTemperature }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Total Weight</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.grossWeight }}{{ booking.grossWeightUnit }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Total Colli</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.totalColli }} pallets</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Categorization Section -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Categorization</h3>
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Category</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.categorization }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">GMP Certification</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">
+                    <span v-if="booking.isGmp" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Required</span>
+                    <span v-else class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Not Required</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Contacts Section -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Project Contacts</h3>
+              <div class="grid grid-cols-2 gap-6">
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Project Manager</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.projectManager }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Outsourcing Manager</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.outsourcingManager }}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pickup & Delivery Locations Section -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">Locations</h3>
+              <div class="grid grid-cols-2 gap-6">
+                <div class="rounded-lg bg-gray-50 p-4">
+                  <div class="font-semibold text-gray-900 mb-3">Pickup Location</div>
+                  <div class="space-y-2 text-sm text-gray-600">
+                    <div><span class="font-medium text-gray-900">{{ booking.senderContactName }}</span></div>
+                    <div>{{ booking.senderPickupAddress }}</div>
+                    <div class="pt-2 border-t border-gray-200">
+                      <div class="text-xs text-gray-500">Email</div>
+                      <div class="font-medium text-gray-700">{{ booking.senderContactEmail }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">Phone</div>
+                      <div class="font-medium text-gray-700">{{ booking.senderContactPhone }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">VAT Number</div>
+                      <div class="font-medium text-gray-700">{{ booking.senderVatNumber }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">Reference</div>
+                      <div class="font-medium text-gray-700">{{ booking.senderPickupReference }}</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rounded-lg bg-gray-50 p-4">
+                  <div class="font-semibold text-gray-900 mb-3">Delivery Location</div>
+                  <div class="space-y-2 text-sm text-gray-600">
+                    <div><span class="font-medium text-gray-900">{{ booking.receiverContactName }}</span></div>
+                    <div>{{ booking.receiverDeliveryAddress }}</div>
+                    <div class="pt-2 border-t border-gray-200">
+                      <div class="text-xs text-gray-500">Email</div>
+                      <div class="font-medium text-gray-700">{{ booking.receiverContactEmail }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">Phone</div>
+                      <div class="font-medium text-gray-700">{{ booking.receiverContactPhone }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">VAT Number</div>
+                      <div class="font-medium text-gray-700">{{ booking.receiverVatNumber }}</div>
+                    </div>
+                    <div>
+                      <div class="text-xs text-gray-500">Reference</div>
+                      <div class="font-medium text-gray-700">{{ booking.receiverDeliveryReference }}</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="border-t border-gray-200 pt-6">
+              <h3 class="font-semibold text-gray-900 mb-4">General Comment</h3>
+              <div class="rounded-lg bg-blue-50 p-4 text-sm text-gray-700 border border-blue-100">
+                {{ booking.generalComment }}
+              </div>
+              <h3 class="font-semibold text-gray-900 mt-6 mb-4">Shipping Comment</h3>
+              <div class="rounded-lg bg-amber-50 p-4 text-sm text-gray-700 border border-amber-100">
+                {{ booking.shippingComment }}
               </div>
             </div>
 
