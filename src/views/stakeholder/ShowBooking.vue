@@ -183,10 +183,10 @@
                   <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.categorization }}</div>
                 </div>
                 <div>
-                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">GMP Certification</div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Is GMP?</div>
                   <div class="mt-2 text-sm font-medium text-gray-900">
-                    <span v-if="booking.isGmp" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Required</span>
-                    <span v-else class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">Not Required</span>
+                    <span v-if="booking.isGmp" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Yes</span>
+                    <span v-else class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">No</span>
                   </div>
                 </div>
               </div>
