@@ -391,6 +391,55 @@
                   </div>
                 </div>
                 </div>
+                <div class="rounded-md border theme-soft-border bg-white p-4">
+                <h2 class="theme-text text-lg font-semibold">
+                  Courier information
+                </h2>
+
+                <div class="flex gap-5 mt-3">
+                  <div class="w-full">
+                  <FormLabelTooltip for-id="courier" label="Courier" :tooltip="tooltipMessage" label-class="theme-text" />
+                  <div class="mt-1">
+                  <select
+                    v-model="bookingForm.courier"
+                    id="courier"
+                    name="courier"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border"
+                  >
+                    <option value="">Select courier</option>
+                    <option value="dhl">DHL</option>
+                    <option value="courier_company">CourierCompany</option>
+                  </select>
+                  </div>
+                  </div>
+                  <div class="w-full">
+                  <FormLabelTooltip for-id="tracking_number" label="Tracking number" :tooltip="tooltipMessage" label-class="theme-text" />
+                  <div class="mt-1">
+                    <input
+                    v-model="bookingForm.trackingNumber"
+                    type="text"
+                    id="tracking_number"
+                    name="tracking_number"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="Enter tracking number"
+                    />
+                  </div>
+                  </div>
+                  <div class="w-full">
+                  <FormLabelTooltip for-id="courier_reference" label="Reference number" :tooltip="tooltipMessage" label-class="theme-text" />
+                  <div class="mt-1">
+                    <input
+                    v-model="bookingForm.courierReference"
+                    type="text"
+                    id="courier_reference"
+                    name="courier_reference"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400"
+                    placeholder="Enter reference number"
+                    />
+                  </div>
+                  </div>
+                </div>
+                </div>
                 <div>
                   General shipping comment
 
@@ -625,6 +674,28 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="rounded-md border theme-soft-border bg-white p-4">
+                  <h3 class="theme-text text-base font-semibold">Courier information</h3>
+                  <div class="mt-3 grid grid-cols-1 gap-4 md:grid-cols-3">
+                    <div>
+                      <FormLabelTooltip for-id="summary_courier" label="Courier" :tooltip="tooltipMessage" label-class="theme-soft-text" />
+                      <select v-model="bookingForm.courier" id="summary_courier" class="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border">
+                        <option value="">Select courier</option>
+                        <option value="dhl">DHL</option>
+                        <option value="courier_company">CourierCompany</option>
+                      </select>
+                    </div>
+                    <div>
+                      <FormLabelTooltip for-id="summary_tracking_number" label="Tracking number" :tooltip="tooltipMessage" label-class="theme-soft-text" />
+                      <input v-model="bookingForm.trackingNumber" id="summary_tracking_number" type="text" class="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                    </div>
+                    <div>
+                      <FormLabelTooltip for-id="summary_courier_reference" label="Reference number" :tooltip="tooltipMessage" label-class="theme-soft-text" />
+                      <input v-model="bookingForm.courierReference" id="summary_courier_reference" type="text" class="mt-1 block w-full rounded-md bg-white px-3 py-1.5 text-sm text-gray-900 outline-1 -outline-offset-1 theme-soft-border" />
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
         </div>
@@ -723,6 +794,9 @@ const bookingForm = ref({
   receiverVatNumber: 'KR 12-1234567-89-0',
   receiverDeliveryReference: 'REF-SOU-KOR-001',
   shippingComment: 'Deliver to warehouse entrance. Requires signature on receipt. Check temperature logs upon arrival.',
+  courier: 'dhl',
+  trackingNumber: 'DHL123456789',
+  courierReference: 'REF-COURIER-001',
 })
 
 
@@ -735,7 +809,7 @@ function addCargoItem() {
 const steps = ref([
   { id: 'Step 1', name: 'General information', status: 'current' },
   { id: 'Step 2', name: 'Cargo Details', status: 'upcoming' },
-  { id: 'Step 3', name: 'Shipping consignee/consignor',  status: 'upcoming' },
+  { id: 'Step 3', name: 'Shipping Details',  status: 'upcoming' },
   { id: 'Step 4', name: 'Review and Confirm',  status: 'upcoming' },
 ])
 // function to change steps

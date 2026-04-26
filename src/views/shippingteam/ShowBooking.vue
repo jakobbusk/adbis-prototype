@@ -273,8 +273,46 @@
             </div>
 
           </div>
-          <div v-show="tabs[1].current" class="text-gray-500">
-            Tracking information will be displayed here.
+          <div v-show="tabs[1].current" class="space-y-6">
+            <!-- Courier Information -->
+            <div class="rounded-lg bg-gray-50 p-4">
+              <h3 class="font-semibold text-gray-900 mb-4">Courier Information</h3>
+              <div class="grid grid-cols-3 gap-6">
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Courier</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.courier }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Tracking Number</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.trackingNumber }}</div>
+                </div>
+                <div>
+                  <div class="text-xs font-semibold uppercase tracking-wide text-gray-500">Reference Number</div>
+                  <div class="mt-2 text-sm font-medium text-gray-900">{{ booking.courierReference }}</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tracking Status -->
+            <div class="rounded-lg bg-green-50 p-4 border border-green-100">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                  <div class="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
+                    <svg viewBox="0 0 20 20" fill="currentColor" class="size-5 text-green-600">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16Zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5Z" clip-rule="evenodd" />
+                    </svg>
+                  </div>
+                  <div>
+                    <div class="text-sm font-semibold text-gray-900">Out for delivery</div>
+                    <div class="text-xs text-gray-500">Your shipment is on its way to the destination</div>
+                    <div class="text-xs text-gray-400 mt-1">Updated: April 26, 2026 at 10:30 AM</div>
+                  </div>
+                </div>
+                <a href="https://www.dhl.com" target="_blank" class="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-green-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-green-600">
+                  Track on DHL
+                </a>
+              </div>
+            </div>
           </div>
           <div v-show="tabs[2].current" class="text-gray-500">
             <div class="mt-4 overflow-x-auto">
@@ -422,6 +460,9 @@ const booking = {
   receiverVatNumber: 'KR 12-1234567-89-0',
   receiverDeliveryReference: 'REF-SOU-KOR-001',
   shippingComment: 'Deliver to warehouse entrance. Requires signature on receipt. Check temperature logs upon arrival.',
+  courier: 'DHL',
+  trackingNumber: 'DHL123456789',
+  courierReference: 'REF-COURIER-001',
   cargoItems: [
     {
       itemNo: '1',

@@ -88,6 +88,6 @@ db.prepare(`
 //bookingId: 1, message: 'Out for delivery', type: 'notification', sender: 'DHL', createdAt: '2026-04-02 12:30:00'
 db.prepare(`
     INSERT INTO Timeline (bookingId, message, type, sender, createdAt)
-    VALUES ('1', 'Out for delivery', 'notification', 'DHL', '2026-04-20 12:30:00')
+    VALUES ('1', 'Out for delivery', 'notification', 'DHL', '2026-04-26 10:30:00')
 `).run();
 }
