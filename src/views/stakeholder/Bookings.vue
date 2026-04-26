@@ -13,8 +13,8 @@
         </div>
       </div>
 
-      <div >
-          <div v-show="tabs[0].current" >
+        <div >
+          <div v-show="tabs[0].current || tabs[1].current || tabs[2].current" >
   <table class="w-full text-left">
     <thead class="border-b theme-soft-border bg-gray-50 ">
       <tr>
@@ -100,10 +100,6 @@
       </tr>
     </tbody>
   </table>
-
-          </div>
-          <div v-show="tabs[1].current" >
-            Unassigned Bookings table
           </div>
       </div>
   </StakeholderLayout>
@@ -128,12 +124,40 @@ const tabs = ref([
   { name: 'Completed', count: '6', current: false },
 ])
 
+function calculateTabCounts() {
+  const myBookingsCount = bookings.filter(booking => booking.bookingResponsible === 'Stefanie Jensen' && booking.status.code !== 'completed').length;
+  const teamBookingsCount = bookings.filter(booking => booking.status.code !== 'completed').length;
+  const completedCount = bookings.filter(booking => booking.status.code === 'completed').length;
+
+  tabs.value[0].count = String(myBookingsCount);
+  tabs.value[1].count = String(teamBookingsCount);
+  tabs.value[2].count = String(completedCount);
+}
+
 // Function to switch tabs and update the current state
 function switchTab(selectedTab) {
   tabs.value.forEach(tab => {
     tab.current = (tab.name === selectedTab.name);
   });
 }
+
+function filterBookings() {
+  if (tabs.value[0].current) {
+    return bookings.filter(booking => booking.bookingResponsible === 'Stefanie Jensen' && booking.status.code !== 'completed');
+  }
+
+  if (tabs.value[1].current) {
+    return bookings.filter(booking => booking.status.code !== 'completed');
+  }
+
+  if (tabs.value[2].current) {
+    return bookings.filter(booking => booking.status.code === 'completed');
+  }
+
+  return bookings;
+}
+
+
 
 // Search filter refs
 const searchBooking = ref('');
@@ -150,7 +174,7 @@ const matchesSearch = (value, searchTerm) => {
 
 // Computed property for filtered bookings
 const filteredBookings = computed(() => {
-  return bookings.filter(booking => {
+  return filterBookings().filter(booking => {
     // Booking ID and Project search
     const bookingMatch = !searchBooking.value ||
       matchesSearch(booking.bookingID, searchBooking.value) ||
@@ -190,7 +214,7 @@ const bookings = [
     project: 'NN9423',
     status: { name: 'Draft', code: 'draft' },
     description: 'Electronics - 20 pallets',
-    shippingResponsible: 'John Doe',
+    shippingResponsible: '*TBA*',
     bookingResponsible: 'Stefanie Jensen',
     pickup: { adress: 'Hamburg', contry: 'Germany', expectedDate: '2026-05-15' },
     shipmentDetails: '20 API, weight: 2000mg, volume: 1m3, temp: -20C',
@@ -203,7 +227,7 @@ const bookings = [
     status: { name: 'New', code: 'new' },
     description: 'Chemicals - 10 pallets',
     shippingResponsible: 'Jane Doe',
-    bookingResponsible: 'Stefanie Jensen',
+    bookingResponsible: 'Ella Smith',
     pickup: { adress: 'Rotterdam', contry: 'Netherlands', expectedDate: '2026-05-16' },
     shipmentDetails: '10 API, weight: 1000mg, volume: 0.5m3, temp: -18C',
     dropoff: { adress: 'Singapore', contry: 'Singapore', expectedDate: '2026-05-26' },
@@ -227,7 +251,7 @@ const bookings = [
     status: { name: 'Approved QA', code: 'approved-qa' },
     description: 'Reagents - 12 pallets',
     shippingResponsible: 'Sarah Chen',
-    bookingResponsible: 'Stefanie Jensen',
+    bookingResponsible: 'Mike Brown',
     pickup: { adress: 'Oslo', contry: 'Norway', expectedDate: '2026-05-18' },
     shipmentDetails: '12 API, weight: 1200mg, volume: 0.9m3, temp: 5C',
     dropoff: { adress: 'Seoul', contry: 'South Korea', expectedDate: '2026-05-28' },
@@ -251,7 +275,7 @@ const bookings = [
     status: { name: 'Shipment ready', code: 'shipment-ready' },
     description: 'Sterile bags - 16 pallets',
     shippingResponsible: 'John Doe',
-    bookingResponsible: 'Stefanie Jensen',
+    bookingResponsible: 'Torben Jensen',
     pickup: { adress: 'Antwerp', contry: 'Belgium', expectedDate: '2026-05-20' },
     shipmentDetails: '16 API, weight: 1600mg, volume: 1.2m3, temp: 4C',
     dropoff: { adress: 'Sao Paulo', contry: 'Brazil', expectedDate: '2026-05-30' },
@@ -275,7 +299,7 @@ const bookings = [
     status: { name: 'Shipment booked', code: 'shipment-booked' },
     description: 'Vials - 14 pallets',
     shippingResponsible: 'Jane Doe',
-    bookingResponsible: 'Stefanie Jensen',
+    bookingResponsible: 'Carsten Jensen',
     pickup: { adress: 'Hamburg', contry: 'Germany', expectedDate: '2026-05-21' },
     shipmentDetails: '14 API, weight: 1400mg, volume: 1.1m3, temp: -5C',
     dropoff: { adress: 'Shanghai', contry: 'China', expectedDate: '2026-05-31' },
@@ -342,6 +366,8 @@ const bookings = [
     dropoff: { adress: 'Mumbai', contry: 'India', expectedDate: '2026-06-04' },
   },
 ]
+
+calculateTabCounts();
 
 
 </script>

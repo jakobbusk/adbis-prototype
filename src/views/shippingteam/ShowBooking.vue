@@ -1,5 +1,5 @@
 <template>
-    <StakeholderLayout>
+    <ShippingLayout>
 
     <template v-slot:plain>
     <div class="mx-auto max-w-375 px-4 py-6 sm:px-6 lg:px-8 space-y-4">
@@ -39,7 +39,7 @@
         </div>
         <div class="mt-5 flex lg:mt-0 lg:ml-4">
           <span class="hidden sm:block">
-            <router-link :to="`/stakeholder/bookings/${bookingId}/edit`" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50">
+            <router-link :to="`/shipping/bookings/${bookingId}/edit`" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50">
               <svg viewBox="0 0 20 20" fill="currentColor" data-slot="icon" aria-hidden="true" class="mr-1.5 -ml-0.5 size-5 text-gray-400">
                 <path d="m2.695 14.762-1.262 3.155a.5.5 0 0 0 .65.65l3.155-1.262a4 4 0 0 0 1.343-.886L17.5 5.501a2.121 2.121 0 0 0-3-3L3.58 13.419a4 4 0 0 0-.885 1.343Z" />
               </svg>
@@ -315,10 +315,11 @@
     </div>
     </template>
 
-    </StakeholderLayout>
+    </ShippingLayout>
 </template>
 
 <script setup>
+import ShippingLayout from '@/layouts/ShippingLayout.vue';
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 import { ref } from 'vue'
 import { useRoute } from 'vue-router';

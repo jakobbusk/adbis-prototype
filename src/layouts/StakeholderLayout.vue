@@ -28,7 +28,7 @@
               <button type="button" class="rounded-md bg-white px-3 py-2 text-sm font-semibold theme-text shadow-xs hover:bg-gray-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white">Create Booking</button>
             </router-link>
 
-            <button @click="openNotification = !openNotification" type="button" class="relative rounded-full p-1 text-white/80 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-white">
+            <button @click="openTimeline = !openTimeline" type="button" class="relative rounded-full p-1 text-white/80 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-white">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">View notifications</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
@@ -65,8 +65,8 @@
   </main>
 
   <div>
-    <TransitionRoot as="template" :show="openNotification">
-      <Dialog class="relative z-10" @close="openNotification = false">
+    <TransitionRoot as="template" :show="openTimeline">
+      <Dialog class="relative z-10" @close="openTimeline = false">
         <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="" leave="ease-in-out duration-500" leave-from="" leave-to="opacity-0">
           <div class="fixed inset-0 bg-[#001B66]/40 transition-opacity"></div>
         </TransitionChild>
@@ -78,7 +78,7 @@
                 <DialogPanel class="pointer-events-auto relative w-screen max-w-md">
                   <TransitionChild as="template" enter="ease-in-out duration-500" enter-from="opacity-0" enter-to="" leave="ease-in-out duration-500" leave-from="" leave-to="opacity-0">
                     <div class="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-10 sm:pr-4">
-                      <button type="button" class="relative rounded-md text-white/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" @click="openNotification = false">
+                      <button type="button" class="relative rounded-md text-white/80 hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" @click="openTimeline = false">
                         <span class="absolute -inset-2.5"></span>
                         <span class="sr-only">Close panel</span>
                         <XMarkIcon class="size-6" aria-hidden="true" />
@@ -87,11 +87,11 @@
                   </TransitionChild>
                   <div class="theme-overlay relative flex h-full flex-col overflow-y-auto shadow-xl">
                     <header class="flex items-center justify-between border-b theme-soft-border px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
-                      <h2 class="theme-text text-base/7 font-semibold">Activity feed</h2>
+                      <h2 class="theme-text text-base/7 font-semibold">Timeline feed</h2>
                       <a href="#" class="theme-text text-sm/6 font-semibold">View all</a>
                     </header>
                     <ul role="list" class="divide-y theme-soft-border">
-                      <li v-for="item in activityItems" :key="item.commit" :class="item.viewed ? 'opacity-50': ''" class="px-4 py-4 sm:px-6 lg:px-8">
+                      <li v-for="item in activityItems" :key="item.id" :class="item.viewed ? 'opacity-50': ''" class="px-4 py-4 sm:px-6 lg:px-8">
                         <div class="flex items-center gap-x-3">
                           <p class="theme-text flex-auto text-sm font-medium">{{ item.name }}</p>
                           <time :datetime="item.dateTime" class="theme-soft-text flex-none text-xs">{{ item.date }}</time>
@@ -143,30 +143,29 @@ const navLinkClass = (targetPath) => {
   return 'rounded-md px-3 py-2 text-sm font-medium text-white/80 hover:bg-white/10 hover:text-white'
 }
 
-const openNotification = ref(false)
-const activityItems = [
-  {
-    id: 1,
-    name: '#1234 - has been updated',
-    comment: 'Updated booking details for shipment #1234',
-    date: "10min ago",
-    viewed: false,
-  },
-  {
-    id: 2,
-    name: '#5678 - QA team approved',
-    comment: 'Approved the booking for shipment #5678',
-    date: "20min ago",
-    viewed: true,
-  },
-  {
-    id: 3,
-    name: '#9101 - has been created',
-    comment: 'Created a new booking for shipment #9101',
-    date: "30min ago",
-    viewed: true,
-  },
-]
+async function fetchTimeline() {
+  try {
+    const response = await fetch('http://localhost:3000/api/timeline/recent')
+    if (!response.ok) {
+      throw new Error('Failed to fetch timeline data')
+    }
+    const data = await response.json()
+    activityItems.value = data.map(entry => ({
+      id: entry.id,
+      name: entry.message,
+      comment: `By ${entry.sender} (${entry.type})`,
+      date: new Date(entry.createdAt).toLocaleString(),
+      viewed: false,
+    }))
+  } catch (error) {
+    console.error('Error fetching timeline:', error)
+  }
+}
+
+const openTimeline = ref(false)
+const activityItems = ref([])
+
+fetchTimeline()
 
 
 </script>

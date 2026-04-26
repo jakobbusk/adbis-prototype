@@ -1,9 +1,9 @@
 <template>
     <StakeholderLayout>
         <div class="pb-5 sm:flex sm:items-center sm:justify-between">
-        <h3 class="theme-text text-base font-semibold">Creating a shipment booking</h3>
+        <h3 class="theme-text text-base font-semibold">Editing a shipment booking</h3>
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
-            <router-link to="/stakeholder/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</router-link>
+          <router-link to="/stakeholder/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Update</router-link>
             </div>
         </div>
         <nav aria-label="Progress">
@@ -645,7 +645,7 @@ import { computed, ref } from 'vue';
 import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
 import FormLabelTooltip from '@/components/FormLabelTooltip.vue';
 
-const cargoRowCounter = ref(2)
+const cargoRowCounter = ref(3)
 
 function createCargoItem(rowId) {
   return {
@@ -664,35 +664,64 @@ function createCargoItem(rowId) {
   }
 }
 
-const cargoItems = ref([createCargoItem(1)])
+const cargoItems = ref([
+  {
+    rowId: 1,
+    itemNo: '1',
+    materialName: 'Finished Drug Tablets - Variant A',
+    batchNumber: 'FDT-2026-4521',
+    cmoBatchNumber: 'CMO-2026-8821',
+    quantity: '5000',
+    itemType: 'finished-good',
+    netWeight: '500',
+    weightUnit: 'kg',
+    countryOrigin: 'Norway',
+    hsHtsCode: '3004.90.10',
+    totalPrice: '45000.00',
+  },
+  {
+    rowId: 2,
+    itemNo: '2',
+    materialName: 'Finished Drug Capsules',
+    batchNumber: 'FDC-2026-4523',
+    cmoBatchNumber: 'CMO-2026-8823',
+    quantity: '3000',
+    itemType: 'finished-good',
+    netWeight: '300',
+    weightUnit: 'kg',
+    countryOrigin: 'Norway',
+    hsHtsCode: '3004.90.10',
+    totalPrice: '36000.00',
+  }
+])
 
 const bookingForm = ref({
-  businessArea: '',
-  projectNumber: '',
-  expectedShipmentDate: '',
-  projectManager: '',
-  outsourcingManager: '',
-  costCenter: '',
-  generalComment: '',
-  isGmp: false,
-  categorization: '',
-  shippingTemperature: '',
-  grossWeight: '',
+  businessArea: 'Pharmaceutical Manufacturing',
+  projectNumber: 'NN9432',
+  expectedShipmentDate: '2026-05-24',
+  projectManager: 'Thomas Berg',
+  outsourcingManager: 'Nadia Olsen',
+  costCenter: 'CC-2026-001',
+  generalComment: 'Standard pharmaceutical shipment. Temperature controlled required. All items require GMP certification.',
+  isGmp: true,
+  categorization: '2',
+  shippingTemperature: 'refrigerated',
+  grossWeight: '2200',
   grossWeightUnit: 'kg',
-  totalColli: '',
-  senderPickupAddress: '',
-  senderContactName: '',
-  senderContactEmail: '',
-  senderContactPhone: '',
-  senderVatNumber: '',
-  senderPickupReference: '',
-  receiverDeliveryAddress: '',
-  receiverContactName: '',
-  receiverContactEmail: '',
-  receiverContactPhone: '',
-  receiverVatNumber: '',
-  receiverDeliveryReference: '',
-  shippingComment: '',
+  totalColli: '22',
+  senderPickupAddress: 'copenhagen',
+  senderContactName: 'Erik Andersen',
+  senderContactEmail: 'erik.andersen@pharmaoslo.com',
+  senderContactPhone: '+47 23 45 67 89',
+  senderVatNumber: 'NO 123456789',
+  senderPickupReference: 'REF-OSL-001',
+  receiverDeliveryAddress: 'aarhus',
+  receiverContactName: 'Park Ji-won',
+  receiverContactEmail: 'park.jiwon@pharmaseoul.kr',
+  receiverContactPhone: '+82 2 1234 5678',
+  receiverVatNumber: 'KR 12-1234567-89-0',
+  receiverDeliveryReference: 'REF-SOU-KOR-001',
+  shippingComment: 'Deliver to warehouse entrance. Requires signature on receipt. Check temperature logs upon arrival.',
 })
 
 

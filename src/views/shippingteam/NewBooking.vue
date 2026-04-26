@@ -1,9 +1,10 @@
+
 <template>
-    <StakeholderLayout>
+    <ShippingLayout>
         <div class="pb-5 sm:flex sm:items-center sm:justify-between">
         <h3 class="theme-text text-base font-semibold">Creating a shipment booking</h3>
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
-            <router-link to="/stakeholder/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</router-link>
+            <router-link to="/shipping/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</router-link>
             </div>
         </div>
         <nav aria-label="Progress">
@@ -637,12 +638,12 @@
                 Next
             </button>
         </div>
-    </StakeholderLayout>
+    </ShippingLayout>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
-import StakeholderLayout from '@/layouts/StakeholderLayout.vue';
+import ShippingLayout from '@/layouts/ShippingLayout.vue';
 import FormLabelTooltip from '@/components/FormLabelTooltip.vue';
 
 const cargoRowCounter = ref(2)
