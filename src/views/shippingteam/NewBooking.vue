@@ -2,9 +2,20 @@
 <template>
     <ShippingLayout>
         <div class="pb-5 sm:flex sm:items-center sm:justify-between">
-        <h3 class="theme-text text-base font-semibold">Creating a shipment booking</h3>
+        <div class="flex items-center">
+          <h3 class="theme-text text-base font-semibold">Creating a shipment booking</h3>
+                    <span class="ml-3 hidden sm:block">
+            <button type="button" class="inline-flex items-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs inset-ring inset-ring-gray-300 hover:bg-gray-50">
+              Copy from existing booking
+            </button>
+          </span>
+        </div>
+
             <div class="mt-3 flex sm:mt-0 sm:ml-4">
-            <router-link to="/shipping/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create</router-link>
+
+            <router-link to="/shipping/bookings/1" type="button" class="ml-3 inline-flex items-center rounded-md border theme-soft-border bg-white px-3 py-2 text-sm font-semibold theme-text shadow-none hover:bg-gray-50 hover:opacity-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Save as Draft</router-link>
+
+            <router-link to="/shipping/bookings/1" type="button" class="theme-nav ml-3 inline-flex items-center rounded-md px-3 py-2 text-sm font-semibold text-white shadow-xs hover:opacity-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#001B66]">Create Booking</router-link>
             </div>
         </div>
         <nav aria-label="Progress">
@@ -31,15 +42,21 @@
             <div v-if="steps[0].status === 'current'">
               <div class="w-full flex justify-between gap-5">
                   <div class="w-full">
-                    <FormLabelTooltip for-id="business_area" label="Business Area" :tooltip="tooltipMessage" label-class="theme-text" />
+                    <div class="flex justify-between">
+                      <FormLabelTooltip for-id="business_area" label="Business Area" :tooltip="tooltipMessage" label-class="theme-text" />
+                      <div class=" text-red-500">*</div>
+                    </div>
                     <div class="mt-1">
-                      <input v-model="bookingForm.businessArea" type="text" name="Business Area" id="business_area" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <input required v-model="bookingForm.businessArea" type="text" name="Business Area" id="business_area" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
                     </div>
                   </div>
                   <div class="w-full">
-                    <FormLabelTooltip for-id="project_number" label="Project Number" :tooltip="tooltipMessage" label-class="theme-text" />
+                    <div class="flex justify-between">
+                      <FormLabelTooltip for-id="project_number" label="Project Number" :tooltip="tooltipMessage" label-class="theme-text" />
+                      <div class=" text-red-500">*</div>
+                    </div>
                     <div class="mt-1">
-                      <input v-model="bookingForm.projectNumber" type="text" name="Project Number" id="project_number" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
+                      <input required v-model="bookingForm.projectNumber" type="text" name="Project Number" id="project_number" class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400" placeholder="" />
                     </div>
                   </div>
                   <div class="w-full">
