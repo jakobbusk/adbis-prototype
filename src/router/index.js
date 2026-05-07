@@ -5,6 +5,11 @@ const router = createRouter({
   routes: [
     // stakeholder routes
     {
+      path: '/stakeholder/login',
+      name: 'StakeholderLogin',
+      component: () => import('../views/stakeholder/Login.vue')
+    },
+    {
       path: '/stakeholder/dashboard',
       name: 'StakeholderDashboard',
       component: () => import('../views/stakeholder/Dashboard.vue')
@@ -30,6 +35,11 @@ const router = createRouter({
       component: () => import('../views/stakeholder/ShowBooking.vue')
     },
     // Shipping routes
+    {
+      path: '/shipping/login',
+      name: 'ShippingLogin',
+      component: () => import('../views/shippingteam/Login.vue')
+    },
     {
       path: '/shipping/dashboard',
       name: 'ShippingDashboard',
