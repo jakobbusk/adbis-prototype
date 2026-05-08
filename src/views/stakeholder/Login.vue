@@ -29,7 +29,6 @@
                                     id="email"
                                     v-model="email"
                                     type="email"
-                                    required
                                     autocomplete="email"
                                     class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#001B66]/20"
                                 >
@@ -41,7 +40,6 @@
                                     id="password"
                                     v-model="password"
                                     type="password"
-                                    required
                                     autocomplete="current-password"
                                     class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 theme-soft-border placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-[#001B66]/20"
                                 >
