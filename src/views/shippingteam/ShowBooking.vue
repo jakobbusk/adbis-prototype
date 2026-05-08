@@ -368,10 +368,14 @@ const timeline = ref([]);
 const newComment = ref('');
 const isPosting = ref(false);
 const currentSender = ref('John Doe');
+
+// Check if localhost or production API URL should be used
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000';
+
 // Fetch timeline
 async function fetchTimeline() {
   try {
-    const response = await fetch(`http://localhost:3000/api/timeline/${bookingId}`);
+    const response = await fetch(`${apiBaseUrl}/api/timeline/${bookingId}`);
     const timelineData = await response.json();
     timeline.value = timelineData;
   } catch (error) {
@@ -387,7 +391,7 @@ async function postTimelineComment() {
 
   isPosting.value = true;
   try {
-    const response = await fetch(`http://localhost:3000/api/timeline/${bookingId}`, {
+    const response = await fetch(`${apiBaseUrl}/api/timeline/${bookingId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

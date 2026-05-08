@@ -1,0 +1,16 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "timeline-worker",
+	"main": "src/index.js",
+	"compatibility_date": "2026-05-08",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "timeline-db",
+			"database_id": "80214228-fbf4-4d1d-a348-2c718cbad628"
+		}
+	]
+}
